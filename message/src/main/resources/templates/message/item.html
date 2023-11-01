@@ -19,7 +19,7 @@
     </div>
 
     <!-- 추가 -->
-    <h2 th:if="${param.status}" th:text="#{button.save.complete}"></h2>
+    <h2 th:if="${param.status}" th:text="'저장 완료'"></h2>
 
     <div>
         <label for="itemId" th:text="#{label.item.id}">상품 ID</label>
@@ -51,7 +51,7 @@
             <button class="w-100 btn btn-secondary btn-lg"
                     onclick="location.href='items.html'"
                     th:onclick="|location.href='@{/message/items}'|"
-                    type="button" th:text="#{page.items}">목록으로</button>
+                    type="button"th:text="#{page.items}">목록으로</button>
         </div>
     </div>
 

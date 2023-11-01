@@ -1,4 +1,4 @@
-package hello.login.web.argumentResolver;
+package hello.login.web.argumentresolver;
 
 import hello.login.domain.member.Member;
 import hello.login.web.SessionConst;
@@ -17,21 +17,25 @@ public class LoginMemberArgumentResolver implements HandlerMethodArgumentResolve
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-                log.info("supportsParameter 실행");
-                boolean hasLoginAnnotation =parameter.hasParameterAnnotation(Login.class);
-                        boolean hasMemberType =        Member.class.isAssignableFrom(parameter.getParameterType());
-                        return hasLoginAnnotation && hasMemberType;
+        log.info("supportsParameter 실행");
+
+        boolean hasLoginAnnotation = parameter.hasParameterAnnotation(Login.class);
+        boolean hasMemberType = Member.class.isAssignableFrom(parameter.getParameterType());
+
+        return hasLoginAnnotation && hasMemberType;
     }
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-                        log.info("resolveArgument 실행");
-        HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
-       HttpSession session= request.getSession(false);
-       if(session == null){
-           return null;
-       }
-        return   session.getAttribute(SessionConst.LOGIN_MEMBER);
 
+        log.info("resolveArgument 실행");
+
+        HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return null;
+        }
+
+        return session.getAttribute(SessionConst.LOGIN_MEMBER);
     }
 }
